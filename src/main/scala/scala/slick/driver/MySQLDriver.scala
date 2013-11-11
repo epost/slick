@@ -117,24 +117,10 @@ trait MySQLDriver extends ExtendedDriver { driver =>
     // protected def createPhase2 = foreignKeys.map(createForeignKey)
     //override def dropPhase1 = foreignKeys.map(dropForeignKey)
     //override def dropPhase2 = primaryKeys.map(dropPrimaryKey) ++ Iterable(dropTable)
-    override def dropPhase1 = foreignKeys.map(dropForeignKey)
+    //override def dropPhase1 = foreignKeys.map(dropForeignKey)
     override def dropPhase2 = Iterable(dropTable)
 
   }
-
-      class TableDDLBuilder(table: Table[_]) extends super.TableDDLBuilder(table) {
-        def quoteTableName(t: Table[_]) = t.schemaName.fold("")(quoteIdentifier(_) + ".") + quoteIdentifier(t.tableName)
-
-        override protected def dropForeignKey(fk: ForeignKey[_ <: TableNode, _]) = {
-          "ALTER TABLE " + quoteTableName(table) + " DROP FOREIGN KEY " + quoteIdentifier(fk.name)
-        }
-
-        override def dropPrimaryKey(pk: PrimaryKey): String = {
-          "ALTER TABLE " + quoteTableName(table) + " DROP PRIMARY KEY"
-        }
-
-        override def dropPhase2 = Iterable(dropTable)
-      }
 
   class ColumnDDLBuilder(column: FieldSymbol) extends super.ColumnDDLBuilder(column) {
     override protected def appendOptions(sb: StringBuilder) {
