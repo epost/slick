@@ -1,4 +1,5 @@
-version in ThisBuild := "1.0.1"
+// TODO we don't use -SNAPSHOT so as not to confuse sbt/ivy
+version in ThisBuild := "1.0.2.2"
 
 scalaVersion in ThisBuild := "2.10.1"
 

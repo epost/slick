@@ -13,8 +13,8 @@ object SlickBuild extends Build {
   val repoKind = SettingKey[String]("repo-kind", "Maven repository kind (\"snapshots\" or \"releases\")")
 
   lazy val sharedSettings = Seq(
-    organizationName := "Typesafe",
-    organization := "com.typesafe.slick",
+    organizationName := "Shinsetsu",
+    organization := "nl.shinsetsu.slick",
     resolvers += Resolver.sonatypeRepo("snapshots"),
     scalacOptions ++= List("-deprecation", "-feature"),
     libraryDependencies += "org.slf4j" % "slf4j-api" % "1.6.4",
